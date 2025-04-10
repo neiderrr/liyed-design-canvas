@@ -41,7 +41,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         <Link to="/" className="z-50">
           <img 
-            src="/public/lovable-uploads/5f9e94a6-0709-4f1a-9704-8ca6127cd4b2.png" 
+            src="/public/lovable-uploads/80613fd0-056f-42fb-bf9c-d4cb3bd52991.png" 
             alt="Liyed Design Logo" 
             className="h-12 md:h-14"
           />
