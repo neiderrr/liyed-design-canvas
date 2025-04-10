@@ -40,7 +40,11 @@ const Navbar = () => {
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-5'}`}>
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         <Link to="/" className="z-50">
-          <h1 className="text-2xl md:text-3xl font-bold text-liyed-black">LIYED<span className="text-liyed-red">DESIGN</span></h1>
+          <img 
+            src="/public/lovable-uploads/5f9e94a6-0709-4f1a-9704-8ca6127cd4b2.png" 
+            alt="Liyed Design Logo" 
+            className="h-12 md:h-14"
+          />
         </Link>
 
         {/* Desktop Navigation */}
