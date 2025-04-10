@@ -9,10 +9,11 @@ const About = () => {
           <div className="order-2 md:order-1">
             <h2 className="section-title">Sobre la marca</h2>
             <p className="text-lg mb-6 text-gray-700">
-              Liyed Design nació en 2018 de la pasión por crear prendas que combinan la elegancia de lo atemporal con la frescura de lo contemporáneo. Nuestra visión es transformar la moda en una forma de expresión personal genuina.
+              Liyed Design nació en diciembre de 2024 como una apuesta por crear prendas con alma: piezas que mezclan lo atemporal con lo actual, y que hablen por sí solas.
+              Desde el primer boceto, nuestra misión ha sido diseñar ropa con intención, cuidando cada detalle para reflejar autenticidad, estilo y creatividad.
             </p>
             <p className="text-lg mb-8 text-gray-700">
-              Cada colección es el resultado de un cuidadoso proceso creativo donde la calidad, el detalle y la autenticidad son protagonistas. Creemos en prendas que trascienden temporadas y tendencias pasajeras.
+              Aunque estamos dando nuestros primeros pasos, creemos firmemente en el poder de la expresión personal a través de la moda. Cada colección busca conectar con personas que valoran lo único, lo bien hecho y lo que perdura más allá de las tendencias.
             </p>
             
             <div className="flex flex-wrap gap-8 mb-8">
