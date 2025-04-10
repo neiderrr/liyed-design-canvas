@@ -15,25 +15,6 @@ const About = () => {
             <p className="text-lg mb-8 text-gray-700">
               Aunque estamos dando nuestros primeros pasos, creemos firmemente en el poder de la expresión personal a través de la moda. Cada colección busca conectar con personas que valoran lo único, lo bien hecho y lo que perdura más allá de las tendencias.
             </p>
-            
-            <div className="flex flex-wrap gap-8 mb-8">
-              <div>
-                <h3 className="font-montserrat text-4xl font-bold text-liyed-red">6+</h3>
-                <p className="text-gray-500">Años de experiencia</p>
-              </div>
-              <div>
-                <h3 className="font-montserrat text-4xl font-bold text-liyed-red">15+</h3>
-                <p className="text-gray-500">Colecciones</p>
-              </div>
-              <div>
-                <h3 className="font-montserrat text-4xl font-bold text-liyed-red">5k+</h3>
-                <p className="text-gray-500">Clientes satisfechos</p>
-              </div>
-            </div>
-            
-            <Button className="bg-liyed-black hover:bg-black text-white px-8 py-6 text-base rounded-none">
-              Nuestra historia
-            </Button>
           </div>
           
           <div className="order-1 md:order-2 relative">
