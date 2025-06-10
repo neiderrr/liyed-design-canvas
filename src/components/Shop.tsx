@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import { useState } from "react";
@@ -15,7 +14,7 @@ const products = [
   },
   {
     id: 2,
-    name: "Pantalón Casual Negro",
+    name: "Jogger Beige",
     category: "Pantalones",
     price: 120000,
     image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=2487"
