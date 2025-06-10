@@ -10,28 +10,28 @@ const products = [
     id: 1,
     name: "Blusa Elena",
     category: "Blusas",
-    price: 45.99,
+    price: 85000,
     image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=2505"
   },
   {
     id: 2,
     name: "Pantalón Casual Negro",
     category: "Pantalones",
-    price: 59.99,
+    price: 120000,
     image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=2487"
   },
   {
     id: 3,
     name: "Vestido Noche",
     category: "Vestidos",
-    price: 79.99,
+    price: 150000,
     image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=2651"
   },
   {
     id: 4,
     name: "Bolso Elegante",
     category: "Accesorios",
-    price: 49.99,
+    price: 95000,
     image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=2670"
   }
 ];
@@ -86,7 +86,7 @@ const Shop = () => {
               
               <div className="mt-4">
                 <h3 className="font-medium text-lg">{product.name}</h3>
-                <p className="text-liyed-red font-semibold">{product.price.toFixed(2)} €</p>
+                <p className="text-liyed-red font-semibold">${product.price.toLocaleString('es-CO')} COP</p>
               </div>
             </div>
           ))}

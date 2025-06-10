@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Instagram, Facebook, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { Instagram, Facebook, Twitter, Mail, Phone } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -20,7 +20,7 @@ const Contact = () => {
                 <Mail size={24} className="text-liyed-red mt-1" />
                 <div>
                   <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-gray-300">info@liyeddesign.com</p>
+                  <p className="text-gray-300">liyedesign1@gmail.com</p>
                 </div>
               </div>
               
@@ -28,15 +28,7 @@ const Contact = () => {
                 <Phone size={24} className="text-liyed-red mt-1" />
                 <div>
                   <h3 className="font-semibold mb-1">Teléfono</h3>
-                  <p className="text-gray-300">+34 923 456 789</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-4">
-                <MapPin size={24} className="text-liyed-red mt-1" />
-                <div>
-                  <h3 className="font-semibold mb-1">Dirección</h3>
-                  <p className="text-gray-300">Calle de la Moda, 42<br/>28001, Madrid</p>
+                  <p className="text-gray-300">+57 305 236 6735</p>
                 </div>
               </div>
             </div>
