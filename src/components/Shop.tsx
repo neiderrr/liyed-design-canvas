@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import { useState } from "react";
 
-const categories = ["Todos", "Blusas", "Pantalones", "Vestidos", "Accesorios"];
+const categories = ["Todos", "Camisas", "Buzos"];
 
 const products = [
   {
