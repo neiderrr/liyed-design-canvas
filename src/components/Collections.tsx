@@ -6,7 +6,7 @@ const tshirtCategories = [
   {
     id: 1,
     name: "Anime & Manga",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=2670",
+    image: "blob:https://co.pinterest.com/6804558e-175e-470c-b7b3-e295de962b09",
     description: "Diseños inspirados en tus series favoritas"
   },
   {
