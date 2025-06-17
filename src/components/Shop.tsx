@@ -9,7 +9,7 @@ const products = [
     id: 1,
     name: "Camisa de Gojo Cyberpunk",
     category: "Camisas",
-    price: 70.000,
+    price: 80000,
     image: "https://i.pinimg.com/736x/ef/a3/23/efa3232c7e9c5d7c95a1f8d3948f075d.jpg"
   },
   {
