@@ -30,13 +30,13 @@ const tshirtCategories = [
   {
     id: 5,
     name: "Arte & Creatividad",
-    image: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=2580",
+    image: "https://i.pinimg.com/736x/5d/e2/1d/5de21db91b149dfecd9630f3e75b337a.jpg",
     description: "Expresión artística en cada diseño"
   },
   {
     id: 6,
     name: "Ciencia & Espacio",
-    image: "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?q=80&w=2670",
+    image: "https://i.pinimg.com/736x/0a/73/b1/0a73b172bbc8734e6b0488f2e505c7dc.jpg",
     description: "Explora el universo con estilo"
   }
 ];
