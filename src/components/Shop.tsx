@@ -21,17 +21,17 @@ const products = [
   },
   {
     id: 3,
-    name: "Vestido Noche",
-    category: "Vestidos",
+    name: "Camiseta BROOK ONE PIECE",
+    category: "Camisas",
     price: 150000,
-    image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=2651"
+    image: "https://i.pinimg.com/736x/32/79/32/327932c785fe3b4ff9e6852594b39a83.jpg"
   },
   {
     id: 4,
-    name: "Bolso Elegante",
-    category: "Accesorios",
+    name: "Camisa Mclaren",
+    category: "Camisas",
     price: 95000,
-    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=2670"
+    image: "	https://i.pinimg.com/736x/8d/f9/50/8df950365f47151b2b99b8365d43cc77.jpg"
   }
 ];
 
