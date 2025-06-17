@@ -20,7 +20,7 @@ const About = () => {
           <div className="order-1 md:order-2 relative">
             <div className="relative z-10">
               <img 
-                src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=987" 
+                src="https://i.pinimg.com/474x/46/a8/17/46a817ee86b3ec684fc99e32554868cd.jpg" 
                 alt="Diseñadora de Liyed" 
                 className="w-full h-[500px] object-cover"
               />
