@@ -45,7 +45,7 @@ const Collections = () => {
   return (
     <section id="collections" className="py-20 bg-liyed-lightgray">
       <div className="container mx-auto px-4">
-        <h2 className="section-title text-center mx-auto mb-16">Nuestras colecciones</h2>
+     
         
         {/* Categorías de Camisetas Personalizadas */}
         <div>
