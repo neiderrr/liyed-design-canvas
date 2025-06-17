@@ -24,7 +24,7 @@ const tshirtCategories = [
   {
     id: 4,
     name: "Cultura Pop & Retro",
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=2670",
+    image: "https://i.pinimg.com/736x/a6/fc/29/a6fc296aff921f32a71cdf9e91b8bc6c.jpg",
     description: "Tendencias que nunca pasan de moda"
   },
   {
