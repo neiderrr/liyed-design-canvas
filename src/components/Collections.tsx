@@ -79,12 +79,11 @@ const Collections = () => {
                     {category.description}
                   </p>
                   <Button 
-                    size="sm" 
-                    className="bg-liyed-red hover:bg-red-700 text-white rounded-none transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300"
-                  >
-                    Ver más
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                   size="sm" 
+                   className="bg-liyed-red hover:bg-red-700 text-white rounded-none transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300>
+                  Ver más
+                   <ArrowRight className="ml-2 h-4 w-4" />
+                 </Button>
                 </div>
               </div>
             ))}
