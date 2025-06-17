@@ -14,8 +14,8 @@ const Hero = () => {
       
       <div className="container mx-auto px-4 z-10 mt-20">
         <div className="max-w-3xl animate-fade-in">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-            <span className="text-liyed-red">DISEÑOS</span> QUE INSPIRAN
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-montserrat font-bold text-white mb-6 leading-tight">
+            DISEÑOS QUE <span className="text-liyed-red">INSPIRAN</span>
             <br />
             Y DEFINEN TU ESTILO
           </h1>
