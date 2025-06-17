@@ -7,14 +7,14 @@ const categories = ["Todos", "Blusas", "Pantalones", "Vestidos", "Accesorios"];
 const products = [
   {
     id: 1,
-    name: "Gojo Cyberpunk T-shirt Design",
-    category: "Blusas",
+    name: "Camisa de Gojo Cyberpunk",
+    category: "Camisas",
     price: 70.000,
     image: "https://i.pinimg.com/736x/ef/a3/23/efa3232c7e9c5d7c95a1f8d3948f075d.jpg"
   },
   {
     id: 2,
-    name: "Buzos super mario world",
+    name: "Buzo super mario world",
     category: "Buzos",
     price: 120000,
     image: "https://i.pinimg.com/736x/70/a4/a3/70a4a32d6622468cde0fb3b806bc2b21.jpg"
