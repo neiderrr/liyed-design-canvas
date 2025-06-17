@@ -18,7 +18,7 @@ const tshirtCategories = [
   {
     id: 3,
     name: "Películas & Series",
-    image: "https://images.unsplash.com/photo-1489599187440-09ba29b9c9d1?q=80&w=2670",
+    image: "https://i.pinimg.com/736x/eb/44/7c/eb447ccb00c3919b297d8f534a76665e.jpg",
     description: "Iconos del cine y la televisión"
   },
   {
