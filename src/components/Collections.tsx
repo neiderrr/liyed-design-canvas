@@ -12,7 +12,7 @@ const tshirtCategories = [
   {
     id: 2,
     name: "Caricaturas & Clásicos",
-    image: "https://images.unsplash.com/photo-1571945153237-4929e783af4a?q=80&w=2535",
+    image: "https://i.pinimg.com/736x/e8/f7/e0/e8f7e0ffcc8b433102bdfbe87b6ca36a.jpg",
     description: "Nostalgia y diversión en cada estampado"
   },
   {
