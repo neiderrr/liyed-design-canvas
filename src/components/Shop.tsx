@@ -23,14 +23,14 @@ const products = [
     id: 3,
     name: "Camiseta BROOK ONE PIECE",
     category: "Camisas",
-    price: 150000,
+    price: 75900,
     image: "https://i.pinimg.com/736x/32/79/32/327932c785fe3b4ff9e6852594b39a83.jpg"
   },
   {
     id: 4,
     name: "Camisa Mclaren",
     category: "Camisas",
-    price: 95000,
+    price: 80000,
     image: "	https://i.pinimg.com/736x/8d/f9/50/8df950365f47151b2b99b8365d43cc77.jpg"
   }
 ];
