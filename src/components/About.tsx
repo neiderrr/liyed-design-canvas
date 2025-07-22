@@ -22,7 +22,7 @@ const About = () => {
               <img 
                 src="https://lh3.googleusercontent.com/pw/AP1GczOt1ocb6JiBHuUusSwP3qFpoRnKB3hUOThJVn2FZzABVCCeLZcNhyYPRk_exazw8iPEZpU2MuWYRRJIPRFpfEyS2-8N07Kf7yR0akYrSzmGRvlLg0oUZaHkfouaFlIUzJpNU6aXYoKAYA3zdzdgoJeMew=w689-h689-s-no-gm?authuser=0" 
                 alt="Diseñadora de Liyed" 
-                className="w-full h-[500px] object-cover"
+                className="w-full h-[400px] object-contain"
               />
             </div>
             <div className="absolute -bottom-10 -left-10 w-64 h-64 border-4 border-liyed-red z-0 hidden md:block"></div>
