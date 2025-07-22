@@ -10,28 +10,32 @@ const products = [
     name: "Camisa de Gojo Cyberpunk",
     category: "Camisas",
     price: 80000,
-    image: "https://i.pinimg.com/736x/ef/a3/23/efa3232c7e9c5d7c95a1f8d3948f075d.jpg"
+    image: "https://i.pinimg.com/736x/ef/a3/23/efa3232c7e9c5d7c95a1f8d3948f075d.jpg",
+    description: "Camisa gris clara - 230gr - 100% algodón"
   },
   {
     id: 2,
     name: "Buzo super mario world",
     category: "Buzos",
     price: 120000,
-    image: "https://i.pinimg.com/736x/70/a4/a3/70a4a32d6622468cde0fb3b806bc2b21.jpg"
+    image: "https://i.pinimg.com/736x/70/a4/a3/70a4a32d6622468cde0fb3b806bc2b21.jpg",
+    description: "Buzo de 305gr - 100% algodón"
   },
   {
     id: 3,
     name: "Camiseta BROOK ONE PIECE",
     category: "Camisas",
     price: 75900,
-    image: "https://i.pinimg.com/736x/32/79/32/327932c785fe3b4ff9e6852594b39a83.jpg"
+    image: "https://i.pinimg.com/736x/32/79/32/327932c785fe3b4ff9e6852594b39a83.jpg",
+    description: "Camisa de 220gr - 100% algodón"
   },
   {
     id: 4,
     name: "Camisa Mclaren",
     category: "Camisas",
     price: 80000,
-    image: "	https://i.pinimg.com/736x/8d/f9/50/8df950365f47151b2b99b8365d43cc77.jpg"
+    image: "	https://i.pinimg.com/736x/8d/f9/50/8df950365f47151b2b99b8365d43cc77.jpg",
+    description: "Camisa de 230gr - 100% algodón"
   }
 ];
 
@@ -85,6 +89,7 @@ const Shop = () => {
               
               <div className="mt-4">
                 <h3 className="font-medium text-lg">{product.name}</h3>
+                <p className="text-gray-600 text-sm mb-2">{product.description}</p>
                 <p className="text-liyed-red font-semibold">${product.price.toLocaleString('es-CO')} COP</p>
               </div>
             </div>
