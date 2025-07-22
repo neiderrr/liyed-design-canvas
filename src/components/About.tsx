@@ -25,7 +25,7 @@ const About = () => {
                 className="w-full h-[400px] object-contain"
               />
             </div>
-            <div className="absolute -bottom-10 -left-10 w-64 h-64 border-4 border-liyed-red z-0 hidden md:block"></div>
+            
           </div>
         </div>
       </div>
