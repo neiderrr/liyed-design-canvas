@@ -96,17 +96,29 @@
 
       /* Shop */
       .chips{ display:flex; gap:.5rem; flex-wrap:wrap; }
-      .chip{ padding:.5rem .9rem; background:#f3f4f6; border:1px solid #e5e7eb; color:#1f2937; font-weight:600; }
+      .chip{ padding:.5rem .9rem; background:#f3f4f6; border:1px solid #e5e7eb; color:#1f2937; font-weight:600; cursor:pointer; transition: all .2s ease; }
       .chip.active{ background: var(--liyed-red); color:#fff; border-color: transparent; }
+      .chip:hover{ background:#e5e7eb; }
+      .chip.active:hover{ background: hsl(0, 100%, 35%); }
       .grid-4{ grid-template-columns: 1fr; }
       @media (min-width: 640px){ .grid-4{ grid-template-columns: repeat(2,1fr);} }
       @media (min-width: 1024px){ .grid-4{ grid-template-columns: repeat(4,1fr);} }
-      .product{ position:relative; overflow:hidden; }
+      .product{ position:relative; overflow:hidden; cursor:pointer; }
       .product .ph{ position:relative; padding-top: 133%; overflow:hidden; }
       .product .ph img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition: transform .5s ease; }
       .product:hover .ph img{ transform: scale(1.08); }
+      .product-overlay{ position:absolute; inset:0; background: rgba(0,0,0,.6); opacity:0; transition: opacity .3s ease; display:flex; align-items:center; justify-content:center; }
+      .product:hover .product-overlay{ opacity:1; }
+      .cart-btn{ background:#fff; color:var(--liyed-black); padding:.75rem 1rem; border:0; font-weight:600; cursor:pointer; transform:translateY(10px); transition: all .3s ease; }
+      .product:hover .cart-btn{ transform:translateY(0); }
+      .cart-btn:hover{ background:var(--liyed-red); color:#fff; }
       .price{ color: var(--liyed-red); font-weight:700; }
       .desc{ color:#6b7280; font-size:.9rem; margin:.15rem 0 .5rem; }
+      
+      /* Cart */
+      .cart-icon{ position:fixed; top:20px; right:20px; z-index:1000; background:var(--liyed-red); color:#fff; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+      .cart-count{ position:absolute; top:-5px; right:-5px; background:#fff; color:var(--liyed-red); width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:700; }
+      .hidden{ display:none !important; }
 
       /* Contact */
       .contact{ background: var(--liyed-black); color:#fff; }
@@ -141,6 +153,12 @@
     </style>
   </head>
   <body>
+    <!-- Cart Icon -->
+    <div class="cart-icon" onclick="toggleCart()">
+      🛒
+      <span class="cart-count hidden" id="cartCount">0</span>
+    </div>
+
     <header>
       <div class="container nav">
         <a href="#home" class="brand" aria-label="Liyed Design - Inicio">
@@ -283,7 +301,7 @@
           </div>
 
           <div class="center mt-12">
-            <a class="btn" style="background:var(--liyed-black); color:#fff;" href="#collections">Ver todas las categorías</a>
+            <button class="btn" style="background:var(--liyed-black); color:#fff;" onclick="showMoreCategories()">Ver todas las categorías</button>
           </div>
         </div>
       </section>
@@ -293,17 +311,22 @@
         <div class="container">
           <div class="flex-between" style="flex-wrap:wrap; gap:1rem;">
             <h2 class="section-title" style="margin-bottom:0;">Tienda</h2>
-            <div class="chips">
-              <span class="chip active">Todos</span>
-              <span class="chip">Camisas</span>
-              <span class="chip">Buzos</span>
-            </div>
+          <div class="chips">
+            <span class="chip active" onclick="filterProducts('Todos')">Todos</span>
+            <span class="chip" onclick="filterProducts('Camisas')">Camisas</span>
+            <span class="chip" onclick="filterProducts('Buzos')">Buzos</span>
+          </div>
           </div>
 
-          <div class="grid grid-4 mt-8">
+          <div class="grid grid-4 mt-8" id="productsGrid">
             <!-- Product 1 -->
-            <article class="product">
-              <div class="ph"><img src="https://i.pinimg.com/736x/ef/a3/23/efa3232c7e9c5d7c95a1f8d3948f075d.jpg" alt="Camisa de Gojo Cyberpunk - Liyed Design" loading="lazy"></div>
+            <article class="product" data-category="Camisas">
+              <div class="ph">
+                <img src="https://i.pinimg.com/736x/ef/a3/23/efa3232c7e9c5d7c95a1f8d3948f075d.jpg" alt="Camisa de Gojo Cyberpunk - Liyed Design" loading="lazy">
+                <div class="product-overlay">
+                  <button class="cart-btn" onclick="addToCart('Camisa de Gojo Cyberpunk', 80000)">🛒 Añadir al carrito</button>
+                </div>
+              </div>
               <div class="mt-4">
                 <h3 class="mb-1">Camisa de Gojo Cyberpunk</h3>
                 <p class="desc">Camisa gris clara - 230gr - 100% algodón</p>
@@ -312,8 +335,13 @@
             </article>
 
             <!-- Product 2 -->
-            <article class="product">
-              <div class="ph"><img src="https://i.pinimg.com/736x/70/a4/a3/70a4a32d6622468cde0fb3b806bc2b21.jpg" alt="Buzo super mario world - Liyed Design" loading="lazy"></div>
+            <article class="product" data-category="Buzos">
+              <div class="ph">
+                <img src="https://i.pinimg.com/736x/70/a4/a3/70a4a32d6622468cde0fb3b806bc2b21.jpg" alt="Buzo super mario world - Liyed Design" loading="lazy">
+                <div class="product-overlay">
+                  <button class="cart-btn" onclick="addToCart('Buzo super mario world', 120000)">🛒 Añadir al carrito</button>
+                </div>
+              </div>
               <div class="mt-4">
                 <h3 class="mb-1">Buzo super mario world</h3>
                 <p class="desc">Buzo de 305gr - 100% algodón</p>
@@ -322,8 +350,13 @@
             </article>
 
             <!-- Product 3 -->
-            <article class="product">
-              <div class="ph"><img src="https://i.pinimg.com/736x/32/79/32/327932c785fe3b4ff9e6852594b39a83.jpg" alt="Camiseta BROOK ONE PIECE - Liyed Design" loading="lazy"></div>
+            <article class="product" data-category="Camisas">
+              <div class="ph">
+                <img src="https://i.pinimg.com/736x/32/79/32/327932c785fe3b4ff9e6852594b39a83.jpg" alt="Camiseta BROOK ONE PIECE - Liyed Design" loading="lazy">
+                <div class="product-overlay">
+                  <button class="cart-btn" onclick="addToCart('Camiseta BROOK ONE PIECE', 75900)">🛒 Añadir al carrito</button>
+                </div>
+              </div>
               <div class="mt-4">
                 <h3 class="mb-1">Camiseta BROOK ONE PIECE</h3>
                 <p class="desc">Camisa de 220gr - 100% algodón</p>
@@ -332,18 +365,83 @@
             </article>
 
             <!-- Product 4 -->
-            <article class="product">
-              <div class="ph"><img src="https://i.pinimg.com/736x/8d/f9/50/8df950365f47151b2b99b8365d43cc77.jpg" alt="Camisa Mclaren - Liyed Design" loading="lazy"></div>
+            <article class="product" data-category="Camisas">
+              <div class="ph">
+                <img src="https://i.pinimg.com/736x/8d/f9/50/8df950365f47151b2b99b8365d43cc77.jpg" alt="Camisa Mclaren - Liyed Design" loading="lazy">
+                <div class="product-overlay">
+                  <button class="cart-btn" onclick="addToCart('Camisa Mclaren', 80000)">🛒 Añadir al carrito</button>
+                </div>
+              </div>
               <div class="mt-4">
                 <h3 class="mb-1">Camisa Mclaren</h3>
                 <p class="desc">Camisa de 230gr - 100% algodón</p>
                 <p class="price">$80.000 COP</p>
               </div>
             </article>
+
+            <!-- Product 5 - Duplicated -->
+            <article class="product" data-category="Camisas">
+              <div class="ph">
+                <img src="https://i.pinimg.com/736x/b8/9c/45/b89c45e2f7d3a8b9c1e2f4d5a6b7c8d9.jpg" alt="Camisa Naruto Hokage - Liyed Design" loading="lazy">
+                <div class="product-overlay">
+                  <button class="cart-btn" onclick="addToCart('Camisa Naruto Hokage', 85000)">🛒 Añadir al carrito</button>
+                </div>
+              </div>
+              <div class="mt-4">
+                <h3 class="mb-1">Camisa Naruto Hokage</h3>
+                <p class="desc">Camisa premium - 240gr - 100% algodón</p>
+                <p class="price">$85.000 COP</p>
+              </div>
+            </article>
+
+            <!-- Product 6 - Duplicated -->
+            <article class="product" data-category="Buzos">
+              <div class="ph">
+                <img src="https://i.pinimg.com/736x/c5/d8/42/c5d842a1b2c3d4e5f6a7b8c9d0e1f2a3.jpg" alt="Buzo Dragon Ball Z - Liyed Design" loading="lazy">
+                <div class="product-overlay">
+                  <button class="cart-btn" onclick="addToCart('Buzo Dragon Ball Z', 125000)">🛒 Añadir al carrito</button>
+                </div>
+              </div>
+              <div class="mt-4">
+                <h3 class="mb-1">Buzo Dragon Ball Z</h3>
+                <p class="desc">Buzo premium - 320gr - 100% algodón</p>
+                <p class="price">$125.000 COP</p>
+              </div>
+            </article>
+
+            <!-- Product 7 - Duplicated -->
+            <article class="product" data-category="Camisas">
+              <div class="ph">
+                <img src="https://i.pinimg.com/736x/a1/b2/c3/a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6.jpg" alt="Camisa Attack on Titan - Liyed Design" loading="lazy">
+                <div class="product-overlay">
+                  <button class="cart-btn" onclick="addToCart('Camisa Attack on Titan', 78000)">🛒 Añadir al carrito</button>
+                </div>
+              </div>
+              <div class="mt-4">
+                <h3 class="mb-1">Camisa Attack on Titan</h3>
+                <p class="desc">Camisa estándar - 220gr - 100% algodón</p>
+                <p class="price">$78.000 COP</p>
+              </div>
+            </article>
+
+            <!-- Product 8 - Duplicated -->
+            <article class="product" data-category="Buzos">
+              <div class="ph">
+                <img src="https://i.pinimg.com/736x/e5/f6/a7/e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0.jpg" alt="Buzo Pokémon Vintage - Liyed Design" loading="lazy">
+                <div class="product-overlay">
+                  <button class="cart-btn" onclick="addToCart('Buzo Pokémon Vintage', 118000)">🛒 Añadir al carrito</button>
+                </div>
+              </div>
+              <div class="mt-4">
+                <h3 class="mb-1">Buzo Pokémon Vintage</h3>
+                <p class="desc">Buzo retro - 300gr - 100% algodón</p>
+                <p class="price">$118.000 COP</p>
+              </div>
+            </article>
           </div>
 
           <div class="center mt-12">
-            <a class="btn" style="background:var(--liyed-black); color:#fff;" href="#shop">Ver todos los productos</a>
+            <button class="btn" style="background:var(--liyed-black); color:#fff;" onclick="showMoreProducts()">Ver todos los productos</button>
           </div>
         </div>
       </section>
@@ -379,13 +477,13 @@
 
             <div class="panel">
               <h3 style="font-weight:800; font-size:1.5rem; margin:0 0 1rem;">Envíanos un mensaje</h3>
-              <form>
+              <form id="contactForm" onsubmit="submitForm(event)">
                 <div class="row">
-                  <input class="field" type="text" placeholder="Nombre" aria-label="Nombre" />
-                  <input class="field" type="email" placeholder="Email" aria-label="Email" />
+                  <input class="field" type="text" id="nombre" placeholder="Nombre" aria-label="Nombre" required />
+                  <input class="field" type="email" id="email" placeholder="Email" aria-label="Email" required />
                 </div>
-                <input class="field mt-4" type="text" placeholder="Asunto" aria-label="Asunto" />
-                <textarea class="field mt-4" placeholder="Mensaje" aria-label="Mensaje" rows="6"></textarea>
+                <input class="field mt-4" type="text" id="asunto" placeholder="Asunto" aria-label="Asunto" required />
+                <textarea class="field mt-4" id="mensaje" placeholder="Mensaje" aria-label="Mensaje" rows="6" required></textarea>
                 <button class="submit mt-4" type="submit">Enviar mensaje</button>
               </form>
             </div>
@@ -436,5 +534,219 @@
 
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    
+    <script>
+      // Cart functionality
+      let cart = [];
+      
+      function addToCart(productName, price) {
+        cart.push({ name: productName, price: price });
+        updateCartCount();
+        showToast('Producto añadido al carrito');
+      }
+      
+      function updateCartCount() {
+        const cartCount = document.getElementById('cartCount');
+        if (cart.length > 0) {
+          cartCount.textContent = cart.length;
+          cartCount.classList.remove('hidden');
+        } else {
+          cartCount.classList.add('hidden');
+        }
+      }
+      
+      function toggleCart() {
+        if (cart.length === 0) {
+          showToast('El carrito está vacío');
+          return;
+        }
+        
+        let cartContent = 'Productos en el carrito:\n\n';
+        let total = 0;
+        cart.forEach((item, index) => {
+          cartContent += `${index + 1}. ${item.name} - $${item.price.toLocaleString('es-CO')} COP\n`;
+          total += item.price;
+        });
+        cartContent += `\nTotal: $${total.toLocaleString('es-CO')} COP`;
+        
+        alert(cartContent);
+      }
+      
+      // Filter products
+      function filterProducts(category) {
+        const chips = document.querySelectorAll('.chip');
+        const products = document.querySelectorAll('.product');
+        
+        // Update active chip
+        chips.forEach(chip => chip.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Show/hide products
+        products.forEach(product => {
+          if (category === 'Todos' || product.dataset.category === category) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+      }
+      
+      // Show more categories
+      function showMoreCategories() {
+        // Create additional categories dynamically
+        const grid = document.querySelector('#collections .grid');
+        const newCategories = [
+          {
+            title: 'Deportes & Gaming',
+            desc: 'Combina pasión deportiva y gaming',
+            img: 'https://i.pinimg.com/736x/f1/a2/b3/f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6.jpg',
+            url: '/categorias/deportes-gaming'
+          },
+          {
+            title: 'Música & Bandas',
+            desc: 'Iconos musicales que inspiran',
+            img: 'https://i.pinimg.com/736x/d2/e3/f4/d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7.jpg',
+            url: '/categorias/musica'
+          },
+          {
+            title: 'Naturaleza & Aventura',
+            desc: 'Para espíritus aventureros',
+            img: 'https://i.pinimg.com/736x/a8/b9/c0/a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3.jpg',
+            url: '/categorias/naturaleza'
+          }
+        ];
+        
+        newCategories.forEach(cat => {
+          const article = document.createElement('article');
+          article.className = 'card';
+          article.innerHTML = `
+            <div class="ratio">
+              <img src="${cat.img}" alt="${cat.title} - Liyed Design" loading="lazy" />
+            </div>
+            <div class="card-overlay">
+              <div>
+                <h4>${cat.title}</h4>
+                <p>${cat.desc}</p>
+                <a class="btn btn-primary btn-sm" href="${cat.url}" target="_blank" rel="noopener">Ver más</a>
+              </div>
+            </div>
+          `;
+          grid.appendChild(article);
+        });
+        
+        event.target.style.display = 'none';
+        showToast('Nuevas categorías añadidas');
+      }
+      
+      // Show more products
+      function showMoreProducts() {
+        const grid = document.getElementById('productsGrid');
+        const newProducts = [
+          {
+            name: 'Camisa Demon Slayer',
+            category: 'Camisas',
+            price: 82000,
+            img: 'https://i.pinimg.com/736x/b4/c5/d6/b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9.jpg',
+            desc: 'Camisa especial - 235gr - 100% algodón'
+          },
+          {
+            name: 'Buzo Rick and Morty',
+            category: 'Buzos',
+            price: 115000,
+            img: 'https://i.pinimg.com/736x/c8/d9/e0/c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3.jpg',
+            desc: 'Buzo divertido - 310gr - 100% algodón'
+          },
+          {
+            name: 'Camisa Stranger Things',
+            category: 'Camisas',
+            price: 79000,
+            img: 'https://i.pinimg.com/736x/e2/f3/a4/e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7.jpg',
+            desc: 'Camisa retro - 225gr - 100% algodón'
+          },
+          {
+            name: 'Buzo Marvel Heroes',
+            category: 'Buzos',
+            price: 130000,
+            img: 'https://i.pinimg.com/736x/f6/a7/b8/f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1.jpg',
+            desc: 'Buzo superhéroes - 325gr - 100% algodón'
+          }
+        ];
+        
+        newProducts.forEach(product => {
+          const article = document.createElement('article');
+          article.className = 'product';
+          article.setAttribute('data-category', product.category);
+          article.innerHTML = `
+            <div class="ph">
+              <img src="${product.img}" alt="${product.name} - Liyed Design" loading="lazy">
+              <div class="product-overlay">
+                <button class="cart-btn" onclick="addToCart('${product.name}', ${product.price})">🛒 Añadir al carrito</button>
+              </div>
+            </div>
+            <div class="mt-4">
+              <h3 class="mb-1">${product.name}</h3>
+              <p class="desc">${product.desc}</p>
+              <p class="price">$${product.price.toLocaleString('es-CO')} COP</p>
+            </div>
+          `;
+          grid.appendChild(article);
+        });
+        
+        event.target.style.display = 'none';
+        showToast('Nuevos productos añadidos');
+      }
+      
+      // Contact form submission
+      function submitForm(event) {
+        event.preventDefault();
+        
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+        const asunto = document.getElementById('asunto').value;
+        const mensaje = document.getElementById('mensaje').value;
+        
+        // Simulate form submission
+        showToast('Mensaje enviado exitosamente. Te contactaremos pronto.');
+        
+        // Reset form
+        document.getElementById('contactForm').reset();
+      }
+      
+      // Toast notification
+      function showToast(message) {
+        // Create toast element
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: var(--liyed-black);
+          color: white;
+          padding: 15px 20px;
+          border-radius: 5px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          z-index: 1001;
+          transform: translateX(100%);
+          transition: transform 0.3s ease;
+        `;
+        toast.textContent = message;
+        
+        // Add to page
+        document.body.appendChild(toast);
+        
+        // Animate in
+        setTimeout(() => {
+          toast.style.transform = 'translateX(0)';
+        }, 100);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+          toast.style.transform = 'translateX(100%)';
+          setTimeout(() => {
+            document.body.removeChild(toast);
+          }, 300);
+        }, 3000);
+      }
+    </script>
   </body>
 </html>
