@@ -119,6 +119,55 @@
       .cart-icon{ position:fixed; top:20px; right:20px; z-index:1000; background:var(--liyed-red); color:#fff; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow: 0 4px 12px rgba(0,0,0,.15); }
       .cart-count{ position:absolute; top:-5px; right:-5px; background:#fff; color:var(--liyed-red); width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:700; }
       .hidden{ display:none !important; }
+      
+      /* Cart Sidebar */
+      .cart-sidebar{ position:fixed; top:0; right:0; width:400px; height:100vh; background:#fff; box-shadow: -4px 0 12px rgba(0,0,0,.15); z-index:1001; transform:translateX(100%); transition: transform .3s ease; overflow-y:auto; }
+      .cart-sidebar.open{ transform:translateX(0); }
+      .cart-header{ padding:1rem; border-bottom:1px solid #e5e7eb; display:flex; justify-content:space-between; align-items:center; }
+      .cart-close{ background:none; border:none; font-size:1.5rem; cursor:pointer; }
+      .cart-items{ padding:1rem; }
+      .cart-item{ display:flex; gap:.75rem; padding:.75rem 0; border-bottom:1px solid #e5e7eb; }
+      .cart-item img{ width:60px; height:60px; object-fit:cover; border-radius:4px; }
+      .cart-item-info{ flex:1; }
+      .cart-item-name{ font-weight:600; margin-bottom:.25rem; }
+      .cart-item-price{ color:var(--liyed-red); font-weight:600; }
+      .quantity-controls{ display:flex; align-items:center; gap:.5rem; margin-top:.5rem; }
+      .qty-btn{ width:28px; height:28px; border:1px solid #d1d5db; background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; font-weight:bold; }
+      .qty-btn:hover{ background:#f3f4f6; }
+      .quantity{ padding:.25rem .5rem; border:1px solid #d1d5db; text-align:center; min-width:40px; }
+      .cart-footer{ position:sticky; bottom:0; background:#fff; padding:1rem; border-top:1px solid #e5e7eb; }
+      .cart-total{ font-size:1.1rem; font-weight:700; margin-bottom:1rem; }
+      .cart-buttons{ display:flex; flex-direction:column; gap:.5rem; }
+      .btn-checkout{ background:var(--liyed-red); color:#fff; padding:.75rem; border:none; font-weight:600; cursor:pointer; }
+      .btn-continue{ background:#f3f4f6; color:var(--liyed-black); padding:.75rem; border:none; font-weight:600; cursor:pointer; }
+      
+      /* Checkout Modal */
+      .checkout-modal{ position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:1002; display:none; place-items:center; }
+      .checkout-modal.open{ display:grid; }
+      .checkout-content{ background:#fff; width:90%; max-width:500px; max-height:90vh; overflow-y:auto; }
+      .checkout-header{ padding:1rem; border-bottom:1px solid #e5e7eb; position:relative; }
+      .checkout-close{ position:absolute; right:1rem; top:1rem; background:none; border:none; font-size:1.5rem; cursor:pointer; }
+      .checkout-steps{ display:flex; justify-content:center; gap:2rem; padding:1rem; background:#f9fafb; }
+      .step{ display:flex; flex-direction:column; align-items:center; opacity:.5; }
+      .step.active{ opacity:1; }
+      .step.completed{ opacity:1; color:var(--liyed-red); }
+      .step-icon{ width:40px; height:40px; border-radius:50%; background:#e5e7eb; display:flex; align-items:center; justify-content:center; margin-bottom:.5rem; }
+      .step.active .step-icon{ background:var(--liyed-red); color:#fff; }
+      .step.completed .step-icon{ background:var(--liyed-red); color:#fff; }
+      .checkout-form{ padding:1.5rem; }
+      .form-group{ margin-bottom:1rem; }
+      .form-label{ display:block; margin-bottom:.5rem; font-weight:600; }
+      .form-input{ width:100%; padding:.75rem; border:1px solid #d1d5db; border-radius:4px; }
+      .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+      .btn-next{ background:var(--liyed-red); color:#fff; padding:.75rem 1.5rem; border:none; font-weight:600; cursor:pointer; width:100%; margin-top:1rem; }
+      .btn-back{ background:#f3f4f6; color:var(--liyed-black); padding:.75rem 1.5rem; border:none; font-weight:600; cursor:pointer; margin-right:.5rem; }
+      .delivery-info{ background:#f0f9ff; padding:1rem; margin:1rem 0; border-radius:4px; border-left:4px solid #0ea5e9; }
+      @media (max-width:480px){
+        .cart-sidebar{ width:100%; }
+        .checkout-content{ width:95%; }
+        .checkout-steps{ flex-direction:column; gap:.5rem; }
+        .form-row{ grid-template-columns:1fr; }
+      }
 
       /* Contact */
       .contact{ background: var(--liyed-black); color:#fff; }
@@ -157,6 +206,59 @@
     <div class="cart-icon" onclick="toggleCart()">
       🛒
       <span class="cart-count hidden" id="cartCount">0</span>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+      <div class="cart-header">
+        <h3 style="margin:0; font-weight:700;">Agregados al carrito</h3>
+        <button class="cart-close" onclick="closeCart()">×</button>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <!-- Cart items will be added here -->
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total" id="cartTotal">Subtotal: $0 COP</div>
+        <div class="cart-buttons">
+          <button class="btn-checkout" onclick="startCheckout()">Ver carrito/ Ir a pagar</button>
+          <button class="btn-continue" onclick="closeCart()">Seguir comprando</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkoutModal">
+      <div class="checkout-content">
+        <div class="checkout-header">
+          <h2 style="margin:0; text-align:center;">Carrito de compras</h2>
+          <button class="checkout-close" onclick="closeCheckout()">×</button>
+        </div>
+        
+        <!-- Checkout Steps -->
+        <div class="checkout-steps">
+          <div class="step active" data-step="cart">
+            <div class="step-icon">🛒</div>
+            <span>Carrito</span>
+          </div>
+          <div class="step" data-step="data">
+            <div class="step-icon">👤</div>
+            <span>Datos</span>
+          </div>
+          <div class="step" data-step="shipping">
+            <div class="step-icon">🚚</div>
+            <span>Entrega</span>
+          </div>
+          <div class="step" data-step="payment">
+            <div class="step-icon">💳</div>
+            <span>Pago</span>
+          </div>
+        </div>
+
+        <!-- Step Content -->
+        <div class="checkout-form" id="checkoutForm">
+          <!-- Content changes based on current step -->
+        </div>
+      </div>
     </div>
 
     <header>
@@ -538,17 +640,26 @@
     <script>
       // Cart functionality
       let cart = [];
+      let currentStep = 'cart';
       
       function addToCart(productName, price) {
-        cart.push({ name: productName, price: price });
+        const existingItem = cart.find(item => item.name === productName);
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({ name: productName, price: price, quantity: 1 });
+        }
         updateCartCount();
+        updateCartSidebar();
+        showCartSidebar();
         showToast('Producto añadido al carrito');
       }
       
       function updateCartCount() {
         const cartCount = document.getElementById('cartCount');
-        if (cart.length > 0) {
-          cartCount.textContent = cart.length;
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        if (totalItems > 0) {
+          cartCount.textContent = totalItems;
           cartCount.classList.remove('hidden');
         } else {
           cartCount.classList.add('hidden');
@@ -560,16 +671,332 @@
           showToast('El carrito está vacío');
           return;
         }
+        showCartSidebar();
+      }
+
+      function showCartSidebar() {
+        updateCartSidebar();
+        document.getElementById('cartSidebar').classList.add('open');
+      }
+
+      function closeCart() {
+        document.getElementById('cartSidebar').classList.remove('open');
+      }
+
+      function updateCartSidebar() {
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
         
-        let cartContent = 'Productos en el carrito:\n\n';
+        if (cart.length === 0) {
+          cartItems.innerHTML = '<p style="text-align:center; color:#6b7280; padding:2rem;">El carrito está vacío</p>';
+          cartTotal.textContent = 'Subtotal: $0 COP';
+          return;
+        }
+
         let total = 0;
-        cart.forEach((item, index) => {
-          cartContent += `${index + 1}. ${item.name} - $${item.price.toLocaleString('es-CO')} COP\n`;
-          total += item.price;
-        });
-        cartContent += `\nTotal: $${total.toLocaleString('es-CO')} COP`;
+        cartItems.innerHTML = cart.map(item => {
+          total += item.price * item.quantity;
+          return `
+            <div class="cart-item">
+              <img src="https://i.pinimg.com/736x/ef/a3/23/efa3232c7e9c5d7c95a1f8d3948f075d.jpg" alt="${item.name}">
+              <div class="cart-item-info">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-price">$${item.price.toLocaleString('es-CO')} COP</div>
+                <div class="quantity-controls">
+                  <button class="qty-btn" onclick="updateQuantity('${item.name}', -1)">-</button>
+                  <input class="quantity" type="text" value="${item.quantity}" readonly>
+                  <button class="qty-btn" onclick="updateQuantity('${item.name}', 1)">+</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        cartTotal.textContent = `Subtotal: $${total.toLocaleString('es-CO')} COP`;
+      }
+
+      function updateQuantity(productName, change) {
+        const item = cart.find(item => item.name === productName);
+        if (item) {
+          item.quantity += change;
+          if (item.quantity <= 0) {
+            cart = cart.filter(item => item.name !== productName);
+          }
+          updateCartCount();
+          updateCartSidebar();
+        }
+      }
+
+      function startCheckout() {
+        closeCart();
+        currentStep = 'cart';
+        updateCheckoutStep();
+        document.getElementById('checkoutModal').classList.add('open');
+      }
+
+      function closeCheckout() {
+        document.getElementById('checkoutModal').classList.remove('open');
+      }
+
+      function updateCheckoutStep() {
+        const steps = document.querySelectorAll('.step');
+        const form = document.getElementById('checkoutForm');
         
-        alert(cartContent);
+        // Update step indicators
+        steps.forEach(step => {
+          step.classList.remove('active', 'completed');
+          if (step.dataset.step === currentStep) {
+            step.classList.add('active');
+          }
+        });
+
+        // Update form content based on current step
+        switch (currentStep) {
+          case 'cart':
+            form.innerHTML = getCartStepContent();
+            break;
+          case 'email':
+            form.innerHTML = getEmailStepContent();
+            break;
+          case 'data':
+            form.innerHTML = getDataStepContent();
+            break;
+          case 'shipping':
+            form.innerHTML = getShippingStepContent();
+            break;
+        }
+      }
+
+      function getCartStepContent() {
+        let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        let cartHtml = cart.map(item => `
+          <div style="display:flex; justify-content:space-between; padding:.5rem 0; border-bottom:1px solid #e5e7eb;">
+            <div>
+              <div style="font-weight:600;">${item.name}</div>
+              <div style="color:#6b7280;">Cantidad: ${item.quantity}</div>
+            </div>
+            <div style="font-weight:600; color:var(--liyed-red);">$${(item.price * item.quantity).toLocaleString('es-CO')} COP</div>
+          </div>
+        `).join('');
+
+        return `
+          <h3>Tu pedido</h3>
+          <div style="margin:1rem 0;">
+            ${cartHtml}
+            <div class="delivery-info">
+              <strong>📦 Pedidos bajo demanda</strong><br>
+              Tu pedido estará listo en <strong>7 días hábiles</strong>. El envío se realizará el día 7 directamente a tu domicilio.
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:1.1rem; font-weight:700; padding-top:1rem; border-top:2px solid #e5e7eb;">
+              <span>Total:</span>
+              <span style="color:var(--liyed-red);">$${total.toLocaleString('es-CO')} COP</span>
+            </div>
+          </div>
+          <button class="btn-next" onclick="nextStep()">Continuar/ Total: $${total.toLocaleString('es-CO')}</button>
+        `;
+      }
+
+      function getEmailStepContent() {
+        return `
+          <h3>Inicia tu proceso de compra</h3>
+          <p style="color:#6b7280; margin-bottom:1.5rem;">Guardamos tu correo de forma segura para recordar tus preferencias e informarte de tus pedidos.</p>
+          <div class="form-group">
+            <label class="form-label">Ingresa tu correo electrónico</label>
+            <input class="form-input" type="email" id="userEmail" placeholder="correo@email.com" required>
+          </div>
+          <button class="btn-next" onclick="nextStep()">Confirmar</button>
+        `;
+      }
+
+      function getDataStepContent() {
+        return `
+          <h3>Ingresa tus datos</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">*Correo electrónico</label>
+              <input class="form-input" type="email" id="email" value="${document.getElementById('userEmail')?.value || ''}" readonly>
+            </div>
+            <div class="form-group">
+              <label class="form-label">*Nombre</label>
+              <input class="form-input" type="text" id="firstName" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">*Apellido</label>
+              <input class="form-input" type="text" id="lastName" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">*Tipo de documento</label>
+              <select class="form-input" id="docType" required>
+                <option value="">Cédula ciudadana...</option>
+                <option value="cc">Cédula de ciudadanía</option>
+                <option value="ce">Cédula de extranjería</option>
+                <option value="passport">Pasaporte</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">*Número</label>
+              <input class="form-input" type="text" id="docNumber" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">*Celular</label>
+              <input class="form-input" type="tel" id="phone" required>
+            </div>
+          </div>
+          <div style="margin:1rem 0;">
+            <label style="display:flex; align-items:center; gap:.5rem;">
+              <input type="checkbox" required>
+              <span style="font-size:.9rem;">*Acepto términos y condiciones, términos y condiciones marketplace</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:.5rem; margin-top:.5rem;">
+              <input type="checkbox" required>
+              <span style="font-size:.9rem;">*Autorizo tratamiento de mis datos personales</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:.5rem; margin-top:.5rem;">
+              <input type="checkbox">
+              <span style="font-size:.9rem;">Autorizo el tratamiento de mis datos para el envío de publicidad</span>
+            </label>
+          </div>
+          <div style="display:flex; gap:.5rem;">
+            <button class="btn-back" onclick="prevStep()">Volver al carrito</button>
+            <button class="btn-next" style="flex:1;" onclick="nextStep()">Continuar/ Total: $${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString('es-CO')} COP</button>
+          </div>
+        `;
+      }
+
+      function getShippingStepContent() {
+        return `
+          <h3>Opciones de entrega</h3>
+          <div style="display:flex; gap:1rem; margin:1rem 0;">
+            <div style="flex:1; padding:1rem; border:2px solid var(--liyed-red); border-radius:8px;">
+              <div style="display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;">
+                <span style="font-size:1.5rem;">🚚</span>
+                <strong>Envío a domicilio</strong>
+              </div>
+              <p style="color:#6b7280; margin:0; font-size:.9rem;">Entrega en 7 días hábiles</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">*Departamento</label>
+            <select class="form-input" id="department" required>
+              <option value="">Seleccione una opción</option>
+              <option value="cundinamarca">Cundinamarca</option>
+              <option value="antioquia">Antioquia</option>
+              <option value="valle">Valle del Cauca</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">*Municipio o ciudad capital</label>
+            <select class="form-input" id="city" required>
+              <option value="">Seleccione una opción</option>
+              <option value="bogota">Bogotá</option>
+              <option value="medellin">Medellín</option>
+              <option value="cali">Cali</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">*Tipo de dirección</label>
+              <select class="form-input" id="addressType" required>
+                <option value="">Seleccionar</option>
+                <option value="calle">Calle</option>
+                <option value="carrera">Carrera</option>
+                <option value="avenida">Avenida</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">*Calle</label>
+              <input class="form-input" type="text" id="street" placeholder="Ej: 18" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">*Número</label>
+              <input class="form-input" type="text" id="number1" placeholder="79A" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label"></label>
+              <input class="form-input" type="text" id="number2" placeholder="33">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">*Barrio</label>
+            <input class="form-input" type="text" id="neighborhood" placeholder="Ej: Los Colores" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Piso/Apartamento/Torre/Edificio</label>
+            <input class="form-input" type="text" id="apartment" placeholder="Ej: Torre 5 Apto 302">
+          </div>
+          <div class="form-group">
+            <label class="form-label">*Nombre de la persona que recibe</label>
+            <input class="form-input" type="text" id="receiverName" placeholder="Ej: Carlos" required>
+          </div>
+          <div style="display:flex; gap:.5rem;">
+            <button class="btn-back" onclick="prevStep()">Volver</button>
+            <button class="btn-next" style="flex:1;" onclick="finishOrder()">Guardar</button>
+          </div>
+        `;
+      }
+
+      function nextStep() {
+        switch (currentStep) {
+          case 'cart':
+            currentStep = 'email';
+            break;
+          case 'email':
+            const email = document.getElementById('userEmail').value;
+            if (!email) {
+              showToast('Por favor ingresa tu correo electrónico');
+              return;
+            }
+            currentStep = 'data';
+            break;
+          case 'data':
+            // Validate required fields
+            const requiredFields = ['firstName', 'lastName', 'docType', 'docNumber', 'phone'];
+            for (let field of requiredFields) {
+              if (!document.getElementById(field).value) {
+                showToast('Por favor completa todos los campos requeridos');
+                return;
+              }
+            }
+            currentStep = 'shipping';
+            break;
+        }
+        updateCheckoutStep();
+      }
+
+      function prevStep() {
+        switch (currentStep) {
+          case 'email':
+            currentStep = 'cart';
+            break;
+          case 'data':
+            currentStep = 'email';
+            break;
+          case 'shipping':
+            currentStep = 'data';
+            break;
+        }
+        updateCheckoutStep();
+      }
+
+      function finishOrder() {
+        const requiredFields = ['department', 'city', 'addressType', 'street', 'number1', 'neighborhood', 'receiverName'];
+        for (let field of requiredFields) {
+          if (!document.getElementById(field).value) {
+            showToast('Por favor completa todos los campos requeridos');
+            return;
+          }
+        }
+        
+        showToast('¡Pedido realizado exitosamente! Te contactaremos pronto para confirmar los detalles.');
+        cart = [];
+        updateCartCount();
+        closeCheckout();
       }
       
       // Filter products
