@@ -123,7 +123,7 @@
       /* Cart Sidebar */
       .cart-sidebar{ position:fixed; top:0; right:0; width:400px; height:100vh; background:#fff; box-shadow: -4px 0 12px rgba(0,0,0,.15); z-index:1001; transform:translateX(100%); transition: transform .3s ease; overflow-y:auto; }
       .cart-sidebar.open{ transform:translateX(0); }
-      .cart-header{ padding:1rem; border-bottom:1px solid #e5e7eb; display:flex; justify-content:space-between; align-items:center; }
+      .cart-header{ padding:1rem; border-bottom:1px solid #e5e7eb; display:flex; justify-content:space-between; align-items:center; background:#ffd800; }
       .cart-close{ background:none; border:none; font-size:1.5rem; cursor:pointer; }
       .cart-items{ padding:1rem; }
       .cart-item{ display:flex; gap:.75rem; padding:.75rem 0; border-bottom:1px solid #e5e7eb; }
@@ -144,8 +144,8 @@
       /* Checkout Modal */
       .checkout-modal{ position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:1002; display:none; place-items:center; }
       .checkout-modal.open{ display:grid; }
-      .checkout-content{ background:#fff; width:90%; max-width:500px; max-height:90vh; overflow-y:auto; }
-      .checkout-header{ padding:1rem; border-bottom:1px solid #e5e7eb; position:relative; }
+      .checkout-content{ background:#fff; width:90%; max-width:600px; max-height:90vh; overflow-y:auto; border-radius:8px; }
+      .checkout-header{ padding:1.5rem; border-bottom:1px solid #e5e7eb; position:relative; background:#ffd800; text-align:center; }
       .checkout-close{ position:absolute; right:1rem; top:1rem; background:none; border:none; font-size:1.5rem; cursor:pointer; }
       .checkout-steps{ display:flex; justify-content:center; gap:2rem; padding:1rem; background:#f9fafb; }
       .step{ display:flex; flex-direction:column; align-items:center; opacity:.5; }
@@ -157,16 +157,26 @@
       .checkout-form{ padding:1.5rem; }
       .form-group{ margin-bottom:1rem; }
       .form-label{ display:block; margin-bottom:.5rem; font-weight:600; }
-      .form-input{ width:100%; padding:.75rem; border:1px solid #d1d5db; border-radius:4px; }
+      .form-input, .form-select{ width:100%; padding:.75rem; border:1px solid #d1d5db; border-radius:4px; }
       .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-      .btn-next{ background:var(--liyed-red); color:#fff; padding:.75rem 1.5rem; border:none; font-weight:600; cursor:pointer; width:100%; margin-top:1rem; }
-      .btn-back{ background:#f3f4f6; color:var(--liyed-black); padding:.75rem 1.5rem; border:none; font-weight:600; cursor:pointer; margin-right:.5rem; }
+      .form-row-3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; }
+      .btn-next{ background:var(--liyed-red); color:#fff; padding:.75rem 1.5rem; border:none; font-weight:600; cursor:pointer; width:100%; margin-top:1rem; border-radius:4px; }
+      .btn-back{ background:#f3f4f6; color:var(--liyed-black); padding:.75rem 1.5rem; border:none; font-weight:600; cursor:pointer; margin-right:.5rem; border-radius:4px; }
       .delivery-info{ background:#f0f9ff; padding:1rem; margin:1rem 0; border-radius:4px; border-left:4px solid #0ea5e9; }
+      .working-notice{ background:#fff3cd; border:1px solid #ffeaa7; padding:1rem; border-radius:4px; margin:1rem 0; text-align:center; }
+      .address-summary{ background:#f8f9fa; padding:1rem; border-radius:4px; margin:1rem 0; border:1px solid #dee2e6; }
+      .payment-methods{ display:grid; gap:1rem; margin:1rem 0; }
+      .payment-option{ border:1px solid #d1d5db; border-radius:4px; padding:1rem; cursor:pointer; transition:border-color .2s ease; }
+      .payment-option:hover{ border-color:var(--liyed-red); }
+      .payment-option.selected{ border-color:var(--liyed-red); background:#fef2f2; }
+      .search-input{ position:relative; }
+      .search-input input{ padding-right:40px; }
+      .search-icon{ position:absolute; right:12px; top:50%; transform:translateY(-50%); color:#6b7280; }
       @media (max-width:480px){
         .cart-sidebar{ width:100%; }
         .checkout-content{ width:95%; }
         .checkout-steps{ flex-direction:column; gap:.5rem; }
-        .form-row{ grid-template-columns:1fr; }
+        .form-row, .form-row-3{ grid-template-columns:1fr; }
       }
 
       /* Contact */
@@ -879,22 +889,59 @@
               <p style="color:#6b7280; margin:0; font-size:.9rem;">Entrega en 7 días hábiles</p>
             </div>
           </div>
+          
+          <div class="working-notice">
+            <strong>¡Estamos trabajando en tu pedido!</strong><br>
+            <span style="color:#856404;">Los pedidos se hacen bajo demanda - Tu pedido estará listo en 7 días hábiles y ese día se enviará a domicilio.</span>
+          </div>
+          
+          <div class="search-input" style="margin-bottom:1rem;">
+            <input class="form-input" type="text" placeholder="🔍 Buscar dirección..." style="padding-left:40px;">
+            <span class="search-icon">🔍</span>
+          </div>
+          
           <div class="form-group">
             <label class="form-label">*Departamento</label>
-            <select class="form-input" id="department" required>
+            <select class="form-input" id="department" onchange="updateCities()" required>
               <option value="">Seleccione una opción</option>
-              <option value="cundinamarca">Cundinamarca</option>
+              <option value="amazonas">Amazonas</option>
               <option value="antioquia">Antioquia</option>
+              <option value="arauca">Arauca</option>
+              <option value="atlantico">Atlántico</option>
+              <option value="bolivar">Bolívar</option>
+              <option value="boyaca">Boyacá</option>
+              <option value="caldas">Caldas</option>
+              <option value="caqueta">Caquetá</option>
+              <option value="casanare">Casanare</option>
+              <option value="cauca">Cauca</option>
+              <option value="cesar">Cesar</option>
+              <option value="choco">Chocó</option>
+              <option value="cordoba">Córdoba</option>
+              <option value="cundinamarca">Cundinamarca</option>
+              <option value="guainia">Guainía</option>
+              <option value="guaviare">Guaviare</option>
+              <option value="huila">Huila</option>
+              <option value="laguajira">La Guajira</option>
+              <option value="magdalena">Magdalena</option>
+              <option value="meta">Meta</option>
+              <option value="narino">Nariño</option>
+              <option value="nortesantander">Norte de Santander</option>
+              <option value="putumayo">Putumayo</option>
+              <option value="quindio">Quindío</option>
+              <option value="risaralda">Risaralda</option>
+              <option value="sanandres">San Andrés y Providencia</option>
+              <option value="santander">Santander</option>
+              <option value="sucre">Sucre</option>
+              <option value="tolima">Tolima</option>
               <option value="valle">Valle del Cauca</option>
+              <option value="vaupes">Vaupés</option>
+              <option value="vichada">Vichada</option>
             </select>
           </div>
           <div class="form-group">
             <label class="form-label">*Municipio o ciudad capital</label>
             <select class="form-input" id="city" required>
               <option value="">Seleccione una opción</option>
-              <option value="bogota">Bogotá</option>
-              <option value="medellin">Medellín</option>
-              <option value="cali">Cali</option>
             </select>
           </div>
           <div class="form-row">
@@ -902,9 +949,20 @@
               <label class="form-label">*Tipo de dirección</label>
               <select class="form-input" id="addressType" required>
                 <option value="">Seleccionar</option>
+                <option value="autopista">Autopista</option>
+                <option value="avcarrera">Av. Carrera</option>
+                <option value="avdiagonal">Av. Diagonal</option>
+                <option value="avtransversal">Av. Transversal</option>
+                <option value="avenidacalle">Avenida Calle</option>
                 <option value="calle">Calle</option>
                 <option value="carrera">Carrera</option>
-                <option value="avenida">Avenida</option>
+                <option value="circular">Circular</option>
+                <option value="circunvalar">Circunvalar</option>
+                <option value="diagonal">Diagonal</option>
+                <option value="manzana">Manzana</option>
+                <option value="otro">Otro</option>
+                <option value="transversal">Transversal</option>
+                <option value="via">Vía</option>
               </select>
             </div>
             <div class="form-group">
@@ -915,11 +973,11 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">*Número</label>
-              <input class="form-input" type="text" id="number1" placeholder="79A" required>
+              <input class="form-input" type="text" id="number1" placeholder="1222" required>
             </div>
             <div class="form-group">
               <label class="form-label"></label>
-              <input class="form-input" type="text" id="number2" placeholder="33">
+              <input class="form-input" type="text" id="number2" placeholder="12">
             </div>
           </div>
           <div class="form-group">
@@ -928,15 +986,156 @@
           </div>
           <div class="form-group">
             <label class="form-label">Piso/Apartamento/Torre/Edificio</label>
-            <input class="form-input" type="text" id="apartment" placeholder="Ej: Torre 5 Apto 302">
+            <input class="form-input" type="text" id="apartment" placeholder="hhh">
           </div>
           <div class="form-group">
             <label class="form-label">*Nombre de la persona que recibe</label>
-            <input class="form-input" type="text" id="receiverName" placeholder="Ej: Carlos" required>
+            <input class="form-input" type="text" id="receiverName" placeholder="aaa" required>
           </div>
+          
+          <div class="address-summary">
+            <h4 style="margin:0 0 .5rem 0;">Resumen</h4>
+            <p id="addressPreview" style="margin:0; color:#6b7280; font-size:.9rem;">La dirección aparecerá aquí conforme completes los campos</p>
+          </div>
+          
           <div style="display:flex; gap:.5rem;">
             <button class="btn-back" onclick="prevStep()">Volver</button>
-            <button class="btn-next" style="flex:1;" onclick="finishOrder()">Guardar</button>
+            <button class="btn-next" style="flex:1;" onclick="nextStep()">Continuar</button>
+          </div>
+        `;
+      }
+
+      function getPaymentStepContent() {
+        return `
+          <div style="text-align:center; margin-bottom:1.5rem;">
+            <img src="/lovable-uploads/32883a67-2179-4fe9-8c39-b053c2d68329.png" alt="Liyed Design" style="height:40px; margin:0 auto;">
+          </div>
+          
+          <h3>Método de pago</h3>
+          
+          <div class="payment-methods">
+            <div class="payment-option selected" onclick="selectPayment(this, 'transfer')">
+              <div style="display:flex; align-items:center; gap:.75rem;">
+                <span style="font-size:1.5rem;">🏦</span>
+                <div>
+                  <strong>Transferencia bancaria</strong>
+                  <p style="margin:.25rem 0 0; color:#6b7280; font-size:.9rem;">Paga directamente desde tu banco</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="payment-option" onclick="selectPayment(this, 'nequi')">
+              <div style="display:flex; align-items:center; gap:.75rem;">
+                <span style="font-size:1.5rem;">📱</span>
+                <div>
+                  <strong>Nequi</strong>
+                  <p style="margin:.25rem 0 0; color:#6b7280; font-size:.9rem;">Pago rápido con Nequi</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="payment-option" onclick="selectPayment(this, 'daviplata')">
+              <div style="display:flex; align-items:center; gap:.75rem;">
+                <span style="font-size:1.5rem;">💳</span>
+                <div>
+                  <strong>DaviPlata</strong>
+                  <p style="margin:.25rem 0 0; color:#6b7280; font-size:.9rem;">Pago con billetera digital</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="address-summary">
+            <h4 style="margin:0 0 .5rem 0;">Resumen del pedido</h4>
+            <div id="orderSummary">
+              <!-- Order summary will be populated here -->
+            </div>
+          </div>
+          
+          <div style="display:flex; gap:.5rem; margin-top:1.5rem;">
+            <button class="btn-back" onclick="prevStep()">Volver</button>
+            <button class="btn-next" style="flex:1;" onclick="finishOrder()">Realizar pedido</button>
+          </div>
+        `;
+      }
+
+      function updateCities() {
+        const department = document.getElementById('department').value;
+        const citySelect = document.getElementById('city');
+        
+        const cities = {
+          cundinamarca: ['Bogotá D.C.', 'Soacha', 'Girardot', 'Zipaquirá', 'Facatativá', 'Chía', 'Madrid', 'Fusagasugá', 'Cajicá', 'Sibaté'],
+          antioquia: ['Medellín', 'Bello', 'Itagüí', 'Envigado', 'Apartadó', 'Turbo', 'Rionegro', 'Sabaneta', 'Caldas', 'La Estrella'],
+          valle: ['Cali', 'Palmira', 'Buenaventura', 'Tuluá', 'Cartago', 'Buga', 'Jamundí', 'Yumbo', 'Candelaria', 'Florida'],
+          atlantico: ['Barranquilla', 'Soledad', 'Malambo', 'Sabanagrande', 'Puerto Colombia', 'Galapa', 'Baranoa', 'Sabanalarga'],
+          santander: ['Bucaramanga', 'Floridablanca', 'Girón', 'Piedecuesta', 'Barrancabermeja', 'San Gil', 'Socorro', 'Málaga'],
+          bolivar: ['Cartagena', 'Magangué', 'Turbaco', 'Arjona', 'El Carmen de Bolívar', 'Mompós', 'Sincelejo', 'Corozal']
+        };
+        
+        citySelect.innerHTML = '<option value="">Seleccione una opción</option>';
+        
+        if (cities[department]) {
+          cities[department].forEach(city => {
+            const option = document.createElement('option');
+            option.value = city.toLowerCase().replace(/\s+/g, '');
+            option.textContent = city;
+            citySelect.appendChild(option);
+          });
+        }
+        
+        updateAddressPreview();
+      }
+
+      function updateAddressPreview() {
+        const department = document.getElementById('department')?.selectedOptions[0]?.text || '';
+        const city = document.getElementById('city')?.selectedOptions[0]?.text || '';
+        const addressType = document.getElementById('addressType')?.selectedOptions[0]?.text || '';
+        const street = document.getElementById('street')?.value || '';
+        const number1 = document.getElementById('number1')?.value || '';
+        const number2 = document.getElementById('number2')?.value || '';
+        const neighborhood = document.getElementById('neighborhood')?.value || '';
+        const apartment = document.getElementById('apartment')?.value || '';
+        const receiverName = document.getElementById('receiverName')?.value || '';
+        
+        let preview = '';
+        if (addressType && street && number1) {
+          preview = `${addressType} ${street} # ${number1}${number2 ? '-' + number2 : ''}`;
+          if (apartment) preview += ` - ${apartment}`;
+          if (neighborhood) preview += ` - ${neighborhood}`;
+          if (city) preview += ` - ${city}`;
+          if (department) preview += ` - ${department}`;
+          if (receiverName) preview += ` - Recibe: ${receiverName}`;
+        } else {
+          preview = 'La dirección aparecerá aquí conforme completes los campos';
+        }
+        
+        const previewElement = document.getElementById('addressPreview');
+        if (previewElement) previewElement.textContent = preview;
+      }
+
+      function selectPayment(element, method) {
+        document.querySelectorAll('.payment-option').forEach(option => {
+          option.classList.remove('selected');
+        });
+        element.classList.add('selected');
+        
+        // Update order summary
+        const orderSummary = document.getElementById('orderSummary');
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        orderSummary.innerHTML = `
+          <div style="display:flex; justify-content:space-between; margin-bottom:.5rem;">
+            <span>Subtotal productos:</span>
+            <span>$${total.toLocaleString('es-CO')} COP</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:.5rem;">
+            <span>Envío:</span>
+            <span>GRATIS</span>
+          </div>
+          <hr style="margin:.75rem 0;">
+          <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem;">
+            <span>Total:</span>
+            <span style="color:var(--liyed-red);">$${total.toLocaleString('es-CO')} COP</span>
           </div>
         `;
       }
@@ -965,6 +1164,17 @@
             }
             currentStep = 'shipping';
             break;
+          case 'shipping':
+            // Validate shipping fields
+            const shippingFields = ['department', 'city', 'addressType', 'street', 'number1', 'neighborhood', 'receiverName'];
+            for (let field of shippingFields) {
+              if (!document.getElementById(field).value) {
+                showToast('Por favor completa todos los campos requeridos');
+                return;
+              }
+            }
+            currentStep = 'payment';
+            break;
         }
         updateCheckoutStep();
       }
@@ -979,6 +1189,9 @@
             break;
           case 'shipping':
             currentStep = 'data';
+            break;
+          case 'payment':
+            currentStep = 'shipping';
             break;
         }
         updateCheckoutStep();
