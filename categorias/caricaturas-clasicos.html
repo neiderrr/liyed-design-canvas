@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caricaturas & Clásicos - Liyed Design</title>
+    <style>
+        :root{
+            --bg: #ffffff;
+            --fg: #121212;
+            --liyed-red: hsl(0, 100%, 41%);
+            --liyed-black: #0a0a0a;
+            --light-gray: #f3f4f6;
+        }
+        * { box-sizing: border-box; }
+        body { margin:0; background:var(--bg); color:var(--fg); font-family: Roboto, sans-serif; }
+        .header { background: var(--liyed-black); color: white; padding: 1rem 0; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+        .nav { display: flex; justify-content: space-between; align-items: center; }
+        .brand img { height: 40px; }
+        .breadcrumb { background: var(--light-gray); padding: 1rem 0; }
+        .breadcrumb a { color: var(--liyed-red); text-decoration: none; }
+        .main { padding: 2rem 0; }
+        .category-header { text-align: center; margin-bottom: 3rem; }
+        .category-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .category-desc { color: #666; font-size: 1.1rem; }
+        .filters { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-btn { padding: 0.5rem 1rem; border: 1px solid #ddd; background: white; cursor: pointer; }
+        .filter-btn.active { background: var(--liyed-red); color: white; border-color: var(--liyed-red); }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .product-card { background: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.3s ease; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-image { position: relative; overflow: hidden; }
+        .product-image img { width: 100%; height: 300px; object-fit: cover; }
+        .product-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.7); opacity: 0; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s ease; }
+        .product-card:hover .product-overlay { opacity: 1; }
+        .add-cart-btn { background: var(--liyed-red); color: white; padding: 0.75rem 1.5rem; border: none; font-weight: 600; cursor: pointer; }
+        .product-info { padding: 1.5rem; }
+        .product-name { font-weight: 600; margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .product-desc { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+        .product-price { color: var(--liyed-red); font-weight: 700; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="../index.html" class="brand">
+                    <img src="/lovable-uploads/32883a67-2179-4fe9-8c39-b053c2d68329.png" alt="Liyed Design">
+                </a>
+                <div>
+                    <a href="../index.html" style="color: white; text-decoration: none;">← Volver al inicio</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Inicio</a> > <a href="#collections">Colecciones</a> > <span>Caricaturas & Clásicos</span>
+        </div>
+    </div>
+
+    <main class="main">
+        <div class="container">
+            <div class="category-header">
+                <h1 class="category-title">Caricaturas & Clásicos</h1>
+                <p class="category-desc">Nostalgia y diversión en cada estampado</p>
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
+                <button class="filter-btn" onclick="filterProducts('camisas')">Camisas</button>
+                <button class="filter-btn" onclick="filterProducts('buzos')">Buzos</button>
+            </div>
+
+            <div class="products-grid">
+                <!-- PRODUCTO 1: MARIO - CAMBIAR AQUÍ -->
+                <div class="product-card" data-category="buzos">
+                    <div class="product-image">
+                        <img src="https://i.pinimg.com/736x/70/a4/a3/70a4a32d6622468cde0fb3b806bc2b21.jpg" alt="Buzo Mario">
+                        <div class="product-overlay">
+                            <button class="add-cart-btn">Añadir al carrito</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Buzo super mario world</h3>
+                        <p class="product-desc">Buzo de 305gr - 100% algodón</p>
+                        <p class="product-price">$120.000 COP</p>
+                    </div>
+                </div>
+
+                <!-- AGREGAR MÁS PRODUCTOS AQUÍ - Duplica el bloque anterior y cambia: -->
+                <!-- 1. La imagen src="" -->
+                <!-- 2. El alt="" de la imagen -->
+                <!-- 3. El nombre en .product-name -->
+                <!-- 4. La descripción en .product-desc -->
+                <!-- 5. El precio en .product-price -->
+                <!-- 6. El data-category (camisas o buzos) -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter products
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
