@@ -30,6 +30,12 @@
         --muted: #6b7280;
         --container: 1280px;
       }
+
+      [data-theme="dark"] {
+        --bg: #0a0a0a;
+        --fg: #ffffff;
+        --light-gray: #1f2937;
+      }
       * { box-sizing: border-box; }
       html{ scroll-behavior: smooth; }
       body{
@@ -48,12 +54,18 @@
 
       /* Header */
       header{ position: fixed; top:0; left:0; right:0; z-index:50; background: rgba(255,255,255,.96); border-bottom: 1px solid #eee; }
+      [data-theme="dark"] header{ background: rgba(10,10,10,.96); border-bottom: 1px solid #333; }
       .nav{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding: .75rem 0; }
       .brand img{ height: 48px; }
       .nav-links{ display:flex; gap:1.25rem; align-items:center; overflow:auto; }
       .nav-links a{ font-family: Montserrat, sans-serif; font-weight:600; white-space: nowrap; padding:.25rem 0; position:relative; }
       .nav-links a::after{ content:""; position:absolute; left:0; bottom:-4px; height:2px; width:0; background:var(--liyed-red); transition: width .2s ease; }
       .nav-links a:hover::after{ width:100%; }
+      
+      /* Theme Toggle */
+      .theme-toggle{ background:none; border:1px solid #ddd; padding:.5rem; cursor:pointer; border-radius:4px; margin-left:1rem; }
+      [data-theme="dark"] .theme-toggle{ border-color:#444; color:#fff; }
+      .theme-toggle:hover{ background:var(--light-gray); }
 
       /* Hero */
       .hero{ position:relative; min-height: 100vh; display:grid; place-items:center; background: var(--liyed-black); color:#fff; overflow:hidden; }
@@ -116,14 +128,15 @@
       .desc{ color:#6b7280; font-size:.9rem; margin:.15rem 0 .5rem; }
       
       /* Cart */
-      .cart-icon{ position:fixed; top:20px; right:20px; z-index:1000; background:var(--liyed-red); color:#fff; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow: 0 4px 12px rgba(0,0,0,.15); }
-      .cart-count{ position:absolute; top:-5px; right:-5px; background:#fff; color:var(--liyed-red); width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:700; }
+      .cart-icon{ position:fixed; top:20px; right:20px; z-index:1000; width:50px; height:50px; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+      .cart-icon img{ width:40px; height:40px; }
+      .cart-count{ position:absolute; top:-5px; right:-5px; background:var(--liyed-red); color:#fff; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:700; }
       .hidden{ display:none !important; }
       
       /* Cart Sidebar */
-      .cart-sidebar{ position:fixed; top:0; right:0; width:400px; height:100vh; background:#fff; box-shadow: -4px 0 12px rgba(0,0,0,.15); z-index:1001; transform:translateX(100%); transition: transform .3s ease; overflow-y:auto; }
+      .cart-sidebar{ position:fixed; top:0; right:0; width:400px; height:100vh; background:var(--bg); box-shadow: -4px 0 12px rgba(0,0,0,.15); z-index:1001; transform:translateX(100%); transition: transform .3s ease; overflow-y:auto; }
       .cart-sidebar.open{ transform:translateX(0); }
-      .cart-header{ padding:1rem; border-bottom:1px solid #e5e7eb; display:flex; justify-content:space-between; align-items:center; background:#ffd800; }
+      .cart-header{ padding:1rem; border-bottom:1px solid #e5e7eb; display:flex; justify-content:space-between; align-items:center; background:var(--bg); }
       .cart-close{ background:none; border:none; font-size:1.5rem; cursor:pointer; }
       .cart-items{ padding:1rem; }
       .cart-item{ display:flex; gap:.75rem; padding:.75rem 0; border-bottom:1px solid #e5e7eb; }
@@ -144,8 +157,8 @@
       /* Checkout Modal */
       .checkout-modal{ position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:1002; display:none; place-items:center; }
       .checkout-modal.open{ display:grid; }
-      .checkout-content{ background:#fff; width:90%; max-width:600px; max-height:90vh; overflow-y:auto; border-radius:8px; }
-      .checkout-header{ padding:1.5rem; border-bottom:1px solid #e5e7eb; position:relative; background:#ffd800; text-align:center; }
+      .checkout-content{ background:var(--bg); width:90%; max-width:600px; max-height:90vh; overflow-y:auto; border-radius:8px; }
+      .checkout-header{ padding:1.5rem; border-bottom:1px solid #e5e7eb; position:relative; background:var(--bg); text-align:center; }
       .checkout-close{ position:absolute; right:1rem; top:1rem; background:none; border:none; font-size:1.5rem; cursor:pointer; }
       .checkout-steps{ display:flex; justify-content:center; gap:2rem; padding:1rem; background:#f9fafb; }
       .step{ display:flex; flex-direction:column; align-items:center; opacity:.5; }
@@ -214,7 +227,7 @@
   <body>
     <!-- Cart Icon -->
     <div class="cart-icon" onclick="toggleCart()">
-      🛒
+      <img src="/lovable-uploads/32883a67-2179-4fe9-8c39-b053c2d68329.png" alt="Logo" />
       <span class="cart-count hidden" id="cartCount">0</span>
     </div>
 
@@ -282,6 +295,7 @@
           <a href="#collections">Colecciones</a>
           <a href="#shop">Tienda</a>
           <a href="#contact">Contacto</a>
+          <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">🌙</button>
         </nav>
       </div>
     </header>
@@ -1386,6 +1400,49 @@
             document.body.removeChild(toast);
           }, 300);
         }, 3000);
+      }
+
+      // Theme toggle
+      function toggleTheme() {
+        const body = document.body;
+        const button = document.querySelector('.theme-toggle');
+        
+        if (body.getAttribute('data-theme') === 'dark') {
+          body.removeAttribute('data-theme');
+          button.textContent = '🌙';
+        } else {
+          body.setAttribute('data-theme', 'dark');
+          button.textContent = '☀️';
+        }
+      }
+
+      // Fix product images in cart
+      const productImages = {
+        'Camisa de Gojo Cyberpunk': 'https://i.pinimg.com/736x/ef/a3/23/efa3232c7e9c5d7c95a1f8d3948f075d.jpg',
+        'Buzo super mario world': 'https://i.pinimg.com/736x/70/a4/a3/70a4a32d6622468cde0fb3b806bc2b21.jpg',
+        'Camiseta BROOK ONE PIECE': 'https://i.pinimg.com/736x/32/79/32/327932c785fe3b4ff9e6852594b39a83.jpg',
+        'Camisa Mclaren': 'https://i.pinimg.com/736x/8d/f9/50/8df950365f47151b2b99b8365d43cc77.jpg'
+      };
+
+      // Update addToCart function to use correct images
+      function addToCart(name, price, image) {
+        const correctImage = productImages[name] || image || 'https://via.placeholder.com/60';
+        
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({
+            name: name,
+            price: price,
+            quantity: 1,
+            image: correctImage
+          });
+        }
+        
+        updateCartCount();
+        updateCartItems();
+        showToast(`${name} añadido al carrito`);
       }
     </script>
   </body>

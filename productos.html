@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos los Productos - Liyed Design</title>
+    <style>
+        :root{
+            --bg: #ffffff;
+            --fg: #121212;
+            --liyed-red: hsl(0, 100%, 41%);
+            --liyed-black: #0a0a0a;
+            --light-gray: #f3f4f6;
+        }
+        * { box-sizing: border-box; }
+        body { margin:0; background:var(--bg); color:var(--fg); font-family: Roboto, sans-serif; padding: 2rem 1rem; }
+        .container { max-width: 1280px; margin: 0 auto; }
+        h1 { font-family: Montserrat, sans-serif; font-weight: 800; text-align: center; margin-bottom: 3rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .product { background: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; }
+        .product img { width: 100%; height: 300px; object-fit: cover; }
+        .product-info { padding: 1rem; }
+        .product-name { font-weight: 600; margin-bottom: 0.5rem; }
+        .product-desc { color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .product-price { color: var(--liyed-red); font-weight: 700; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Todos los Productos</h1>
+        <div class="grid">
+            <!-- CAMISA DE GOJO - CAMBIAR AQUÍ -->
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/ef/a3/23/efa3232c7e9c5d7c95a1f8d3948f075d.jpg" alt="Camisa Gojo">
+                <div class="product-info">
+                    <h3 class="product-name">Camisa de Gojo Cyberpunk</h3>
+                    <p class="product-desc">Camisa gris clara - 230gr - 100% algodón</p>
+                    <p class="product-price">$80.000 COP</p>
+                </div>
+            </div>
+
+            <!-- BUZO MARIO - CAMBIAR AQUÍ -->
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/70/a4/a3/70a4a32d6622468cde0fb3b806bc2b21.jpg" alt="Buzo Mario">
+                <div class="product-info">
+                    <h3 class="product-name">Buzo super mario world</h3>
+                    <p class="product-desc">Buzo de 305gr - 100% algodón</p>
+                    <p class="product-price">$120.000 COP</p>
+                </div>
+            </div>
+
+            <!-- CAMISA BROOK - CAMBIAR AQUÍ -->
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/32/79/32/327932c785fe3b4ff9e6852594b39a83.jpg" alt="Camisa Brook">
+                <div class="product-info">
+                    <h3 class="product-name">Camiseta BROOK ONE PIECE</h3>
+                    <p class="product-desc">Camisa de 220gr - 100% algodón</p>
+                    <p class="product-price">$75.900 COP</p>
+                </div>
+            </div>
+
+            <!-- CAMISA MCLAREN - CAMBIAR AQUÍ -->
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/8d/f9/50/8df950365f47151b2b99b8365d43cc77.jpg" alt="Camisa McLaren">
+                <div class="product-info">
+                    <h3 class="product-name">Camisa Mclaren</h3>
+                    <p class="product-desc">Camisa de 230gr - 100% algodón</p>
+                    <p class="product-price">$80.000 COP</p>
+                </div>
+            </div>
+
+            <!-- PRODUCTOS ADICIONALES - CAMBIAR AQUÍ -->
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/5e/2c/8f/5e2c8f9d4b6e7a8c3d5f9e2b1a4c6d8e.jpg" alt="Producto 5">
+                <div class="product-info">
+                    <h3 class="product-name">Camisa Naruto Hokage</h3>
+                    <p class="product-desc">Camisa de 240gr - 100% algodón</p>
+                    <p class="product-price">$85.000 COP</p>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/7f/3e/9d/7f3e9d2c5b8a1f4e6d9c3a7b2e5f8d1c.jpg" alt="Producto 6">
+                <div class="product-info">
+                    <h3 class="product-name">Buzo Dragon Ball Z</h3>
+                    <p class="product-desc">Buzo de 320gr - 100% algodón</p>
+                    <p class="product-price">$125.000 COP</p>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/2d/6f/4a/2d6f4a8b9c3e5d7f1a6b8e2c4d9f7a3b.jpg" alt="Producto 7">
+                <div class="product-info">
+                    <h3 class="product-name">Camisa Attack on Titan</h3>
+                    <p class="product-desc">Camisa de 225gr - 100% algodón</p>
+                    <p class="product-price">$78.000 COP</p>
+                </div>
+            </div>
+
+            <div class="product">
+                <img src="https://i.pinimg.com/736x/9c/1e/7b/9c1e7b4f8d2a6c3e9f5b1d7a4c8e2b6f.jpg" alt="Producto 8">
+                <div class="product-info">
+                    <h3 class="product-name">Buzo Pokémon Vintage</h3>
+                    <p class="product-desc">Buzo de 310gr - 100% algodón</p>
+                    <p class="product-price">$118.000 COP</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
